@@ -22,16 +22,20 @@ const options = {
 };
 
 const uri = "mongodb+srv://"+process.env.NAME+":"+process.env.PASSWORD+"@cluster0.zjypaj2.mongodb.net/todolistDB"
-console.log(uri);
-console.log(process.env.NAME);
-console.log(process.env.PASSWORD);
-mongoose.connect(uri, options)
-  .then(() => {
-    console.log('Connected to MongoDB Atlas');
-  })
-  .catch((error) => {
-    console.error('Error connecting to MongoDB Atlas:', error);
-  });
+
+// await mongoose.connect(uri)
+//   .then(() => {
+//     console.log('Connected to MongoDB Atlas');
+//   })
+//   .catch((error) => {
+//     console.error('Error connecting to MongoDB Atlas:', error);
+//   });
+
+  try {
+    await mongoose.connect(uri,options);
+  } catch (error) {
+    handleError(error);
+  }
 
 // mongoose.connect('mongodb+srv://akashava50:Akash8050@cluster0.zjypaj2.mongodb.net/todolistDB',{
 //   useNewUrlParser: true,
