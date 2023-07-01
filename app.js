@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose")
 const _ = require('lodash');
+const connectDB = require('./db');
 require('dotenv').config()
 
 const app = express();
@@ -16,12 +17,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
 
-const uri = "mongodb+srv://"+process.env.NAME+":"+process.env.PASSWORD+"@cluster0.zjypaj2.mongodb.net/todolistDB"
+
 
 // await mongoose.connect(uri)
 //   .then(() => {
@@ -31,11 +28,7 @@ const uri = "mongodb+srv://"+process.env.NAME+":"+process.env.PASSWORD+"@cluster
 //     console.error('Error connecting to MongoDB Atlas:', error);
 //   });
 
-  try {
-    await mongoose.connect(uri,options);
-  } catch (error) {
-    handleError(error);
-  }
+connectDB();
 
 // mongoose.connect('mongodb+srv://akashava50:Akash8050@cluster0.zjypaj2.mongodb.net/todolistDB',{
 //   useNewUrlParser: true,
